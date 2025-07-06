@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  # Define o serviço para a aplicação web.
+  web:
+    # Constrói a imagem a partir do Dockerfile no diretório atual.
+    build: .
+    container_name: my-fastapi-app
+    # Mapeia a porta 8000 do host para a porta 8000 do contêiner.
+    ports:
+      - "8000:8000"
+    # Cria um volume para sincronizar o diretório atual com o diretório /app no contêiner.
+    volumes:
+      - .:/app
+    # Define o comando para iniciar a aplicação usando Uvicorn com recarregamento automático.
+    command: uvicorn app:app --host 0.0.0.0 --port 8000 --reload
